@@ -31,16 +31,18 @@
 
 9. Check your DSM’s CPU name, CPU cores at `information center`
 
-# Refer URL
+
+# Reference URL
 
 https://xpenology.com/forum/topic/13030-dsm-5x6x-cpu-name-cores-infomation-change-tool
+
 
 # Change Log
 
 5.1.
    - Use bash change to sh
      > #!/bin/bash
-
+     change to
      > #!/bin/sh
 
 5.0.
@@ -73,10 +75,10 @@ https://xpenology.com/forum/topic/13030-dsm-5x6x-cpu-name-cores-infomation-chang
         I adjusted some inconsistently coded variables
 
 3.0.
-    - Update new version (ch_cpuinfo ver 3.0) 2018.08.26
+   - Update new version (ch_cpuinfo ver 3.0) 2018.08.26
 
-      I made the tool by adding and improving the function. Please refer to above for how to use it.
+     I made the tool by adding and improving the function. Please refer to above for how to use it.
 
-      I delete the old version attached files, new version uploaded and attached.
+     I delete the old version attached files, new version uploaded and attached.
 
-      If you use last version tool, you can use without restore.
+     If you use last version tool, you can use without restore.

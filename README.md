@@ -36,3 +36,17 @@
 
 https://xpenology.com/forum/topic/13030-dsm-5x6x-cpu-name-cores-infomation-change-tool
 
+
+# Reference Screeshot
+
+![Alt text](./github/images/30_001e.png "Run Image")
+
+![Alt text](./github/images/30_002e.png "Run Image")
+
+![Alt text](./github/images/30_003e.png "Run Image")
+
+![Alt text](./github/images/3615_cpu_en.png "DSM Control Pannel")
+
+![Alt text](./github/images/3617_cpu_en.png "DSM Control Pannel")
+
+![Alt text](./github/images/mobile_002.png "DSM 6.x Mobile")

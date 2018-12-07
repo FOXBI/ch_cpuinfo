@@ -25,7 +25,9 @@
 
 7. Run to Binary file
 
-   > ./ch_cpuinfo
+   > ./ch_cpuinfo<br>
+   or<br>
+   > ./ch_cpuinfo.sh (If you use busybox in 5.x, you can use it as a source file)
  
 8. When you execute it, proceed according to the description that is output.
 

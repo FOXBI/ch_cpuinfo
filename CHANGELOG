@@ -1,5 +1,14 @@
 # Change Log
 
+5.2.
+   - Update new version (ch_cpuinfo ver 5.2) 2018.12.07
+     
+     Publish the source through github. 
+     
+     For versions 6.x and later, you can use the binary as before. 
+     
+     If you use busybox in 5.x, you can use it as a source file(ch_cpuinfo.sh).
+
 5.1.
    - Use bash change to sh
      #!/bin/bash

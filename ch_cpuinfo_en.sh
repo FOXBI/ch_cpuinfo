@@ -1,4 +1,5 @@
 #!/bin/sh
+# ver 5.2 2018.12.07 Made by FOXBI
 # ver 5.1 2018.12.06 Made by FOXBI
 # ver 5.0 2018.10.30 Made by FOXBI
 # ver 4.0 2018.09.13 Made by FOXBI
@@ -6,7 +7,7 @@
 # Ver 1.5 2018.08.23 Made by FOXBI
 # Ver 1.1 2018.08.22 Made by FOXBI
 # Ver 1.0 2018.08.17 Made by FOXBI
-ver="5.1"
+ver="5.2"
 # ==============================================================================
 # Y or N Function
 # ==============================================================================
@@ -88,7 +89,12 @@ PREPARE_FN () {
 }
 
 GATHER_FN () {
-    DMI_CHK=`dmidecode | grep 'SMBIOS' | egrep 'NO|sorry' | wc -l`
+    if [ -f "/sbin/dmidecode" ]
+    then
+        DMI_CHK=`dmidecode | grep 'SMBIOS' | egrep 'NO|sorry' | wc -l`
+    else
+        DMI_CHK="1"
+    fi
     if [ "$DMI_CHK" -gt "0" ]
     then
         cpu_vendor=`cat /proc/cpuinfo | grep model | grep name | sort -u | sed "s/(.)//g" | sed "s/(..)//g" | sed "s/CPU//g" | awk '{print $4}'`

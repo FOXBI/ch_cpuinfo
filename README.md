@@ -1,6 +1,6 @@
 # Howto Run
 
-1. Download attached file on your PC (ch_cpuinfo_en.tar) / (ch_cpuinfo_kr.tar is file for korean)
+1. Download attached file on your PC (ch_cpuinfo.tar)
 
 2. Upload file to your DSM location (by filestation, sftp, webdav etc....)
 
@@ -12,15 +12,16 @@
    
    (input admin password)
 
-5. Change directory to where `ch_cpuinfo_en.tar` file is located:
+5. Change directory to where `ch_cpuinfo.tar` file is located:
 
    > cd /volume1/temp
 
 6. Decompress file & check file:
 
-   > tar xvf ch_cpuinfo_en.tar<br>
+   > tar xvf ch_cpuinfo.tar<br>
    > ls -lrt
-   
+   > chmod 755 ch_cpuinfo
+
    (check root’s run auth)
 
 7. Run to Binary file
@@ -41,14 +42,16 @@ https://xpenology.com/forum/topic/13030-dsm-5x6x-cpu-name-cores-infomation-chang
 
 # Reference Screeshot
 
-![Alt text](./github/images/30_001e.png "Run Image")
+![Alt text](./github/images/ch_cpuinfo_001.png "Run Image")
 
-![Alt text](./github/images/30_002e.png "Run Image")
+![Alt text](./github/images/ch_cpuinfo_002.png "Run Image")
 
-![Alt text](./github/images/30_003e.png "Run Image")
+![Alt text](./github/images/ch_cpuinfo_003.png "Run Image")
 
-![Alt text](./github/images/3615_cpu_en.png "DSM Control Pannel")
+![Alt text](./github/images/cpu_918.png "DSM Control Pannel")
 
-![Alt text](./github/images/3617_cpu_en.png "DSM Control Pannel")
+![Alt text](./github/images/cpu_3615.png "DSM Control Pannel")
+
+![Alt text](./github/images/cpu_3617.png "DSM Control Pannel")
 
 ![Alt text](./github/images/mobile_002.png "DSM 6.x Mobile")

@@ -1,13 +1,5 @@
 #!/bin/sh
-# ver 5.2 2018.12.07 Made by FOXBI
-# ver 5.1 2018.12.06 Made by FOXBI
-# ver 5.0 2018.10.30 Made by FOXBI
-# ver 4.0 2018.09.13 Made by FOXBI
-# ver 3.0 2018.08.24 Made by FOXBI
-# Ver 1.5 2018.08.23 Made by FOXBI
-# Ver 1.1 2018.08.22 Made by FOXBI
-# Ver 1.0 2018.08.17 Made by FOXBI
-ver="5.2"
+ver="1.0.0-b01"
 # ==============================================================================
 # Y or N Function
 # ==============================================================================
@@ -65,7 +57,7 @@ PREPARE_FN () {
     then
         if [ "$direct_job" == "y" ]
         then
-            cecho r "경고!! 백업하지 않고 원본에 직접 작업합니다.\n"
+            cecho r "warning!! Work directly on the original file without backup.\n"
         else
             cd $WORK_DIR
             tar -cf $BKUP_DIR/$TIME/admin_center.tar admin_center.js*
@@ -123,6 +115,13 @@ GATHER_FN () {
     CSCNT=`cat /proc/cpuinfo | grep "^siblings" | sort -u | awk '{print $NF}'`
     THCNT=`cat /proc/cpuinfo | grep "^processor" | wc -l`
     ODCNT=`cat /proc/cpuinfo | grep "processor" | wc -l`
+    if [ "$THCNT" -gt "0" ] && [ "$PICNT" == "0" ] && [ "$CICNT" == "0" ] && [ "$CCCNT" == "" ] && [ "$CSCNT" == "" ]
+    then
+        PICNT="1"
+        CICNT="$THCNT"
+        CCCNT="$THCNT"
+        CSCNT="$THCNT"
+    fi
     if [ "$PICNT" -gt "1" ]
     then
         TPCNT="$PICNT CPUs"
@@ -157,19 +156,19 @@ PERFORM_FN () {
     then    
         if [ "$MA_VER" -ge "6" ]
         then
-            cpu_info=`echo "f.cpu_vendor=\"${cpu_vendor}\";f.cpu_family=\"${cpu_family}\";f.cpu_series=\"${cpu_series}\";f.cpu_cores=\"${cpu_cores}\";"`
-            sed -i "s/f.model]);/f.model]);${cpu_info}/g" $BKUP_DIR/admin_center.js
+            cpu_info=`echo "${dt}.cpu_vendor=\"${cpu_vendor}\";${dt}.cpu_family=\"${cpu_family}\";${dt}.cpu_series=\"${cpu_series}\";${dt}.cpu_cores=\"${cpu_cores}\";"`
+            sed -i "s/${dt}.model]);/${dt}.model]);${cpu_info}/g" $BKUP_DIR/admin_center.js
 
             cpu_info_m=`echo "{name: \"cpu_series\",renderer: function(value){var cpu_vendor=\"${cpu_vendor}\";var cpu_family=\"${cpu_family}\";var cpu_series=\"${cpu_series}\";var cpu_cores=\"${cpu_cores}\";return Ext.String.format('{0} {1} {2} [ {3} ]', cpu_vendor, cpu_family, cpu_series, cpu_cores);},label: _T(\"status\", \"cpu_model_name\")},"`
             sed -i "s/\"ds_model\")},/\"ds_model\")},${cpu_info_m}/g" $BKUP_DIR/mobile.js
         else
             if [ "$MI_VER" -gt "0" ]
             then
-                cpu_info=`echo "b.cpu_vendor=\"${cpu_vendor}\";b.cpu_family=\"${cpu_family}\";b.cpu_series=\"${cpu_series}\";b.cpu_cores=\"${cpu_cores}\";"`
+                cpu_info=`echo "${dt}.cpu_vendor=\"${cpu_vendor}\";${dt}.cpu_family=\"${cpu_family}\";${dt}.cpu_series=\"${cpu_series}\";${dt}.cpu_cores=\"${cpu_cores}\";"`
             else
-                cpu_info=`echo "b.cpu_vendor=\"${cpu_vendor}\";b.cpu_family=\"${cpu_family} ${cpu_series}\";b.cpu_cores=\"${cpu_cores}\";"`
+                cpu_info=`echo "${dt}.cpu_vendor=\"${cpu_vendor}\";${dt}.cpu_family=\"${cpu_family} ${cpu_series}\";${dt}.cpu_cores=\"${cpu_cores}\";"`
             fi
-            sed -i "s/b.model]);/b.model]);${cpu_info}/g" $BKUP_DIR/admin_center.js
+            sed -i "s/${dt}.model]);/${dt}.model]);${cpu_info}/g" $BKUP_DIR/admin_center.js
         fi
     else
         COMMENT08_FN
@@ -208,7 +207,7 @@ RECOVER_FN () {
         fi
         if [ "$re_check" == "y" ]
         then
-            echo -e "원본으로 복구후 계속 수행합니다.\n"
+            echo -e "Restore to source and continue.\n"
         else
             COMMENT09_FN
         fi
@@ -235,7 +234,7 @@ RERUN_FN () {
                 fi                        
                 if [ "$MA_VER" -ge "6" ]
                 then
-                    cpu_info="f.cpu_vendor=\\\"${cpu_vendor}\\\";f.cpu_family=\\\"${cpu_family}\\\";f.cpu_series=\\\"${cpu_series}\\\";f.cpu_cores=\\\"${cpu_cores}\\\";"
+                    cpu_info="${dt}.cpu_vendor=\\\"${cpu_vendor}\\\";${dt}.cpu_family=\\\"${cpu_family}\\\";${dt}.cpu_series=\\\"${cpu_series}\\\";${dt}.cpu_cores=\\\"${cpu_cores}\\\";"
                     sed -i "s/${cpu_info}//g" $WORK_DIR/admin_center.js
 
                     ODCNT_CHK=`cat $MWORK_DIR/mobile.js | grep "cpu_cores=\"$ODCNT\"" | wc -l`
@@ -258,9 +257,9 @@ RERUN_FN () {
                 else
                     if [ "$MI_VER" -gt "0" ]
                     then
-                        cpu_info="b.cpu_vendor=\\\"${cpu_vendor}\\\";b.cpu_family=\\\"${cpu_family}\\\";b.cpu_series=\\\"${cpu_series}\\\";b.cpu_cores=\\\"${cpu_cores}\\\";"
+                        cpu_info="${dt}.cpu_vendor=\\\"${cpu_vendor}\\\";${dt}.cpu_family=\\\"${cpu_family}\\\";${dt}.cpu_series=\\\"${cpu_series}\\\";${dt}.cpu_cores=\\\"${cpu_cores}\\\";"
                     else
-                        cpu_info="b.cpu_vendor=\\\"${cpu_vendor}\\\";b.cpu_family=\\\"${cpu_family} ${cpu_series}\\\";b.cpu_cores=\\\"${cpu_cores}\\\";"
+                        cpu_info="${dt}.cpu_vendor=\\\"${cpu_vendor}\\\";${dt}.cpu_family=\\\"${cpu_family} ${cpu_series}\\\";\\\"${dt}\\\".cpu_cores=\\\"${cpu_cores}\\\";"
                     fi
                     sed -i "s/${cpu_info}//g" $WORK_DIR/admin_center.js
                 fi
@@ -372,9 +371,9 @@ CASE_FN () {
 }
 
 EXEC_FN () {
-if [ -d $WORK_DIR ] && [ -d $MWORK_DIR ]
+if [ -d $WORK_DIR ]
 then    
-    READ_YN "자동으로 실행합니다. n 선택시 대화형모드로 진행합니다. (취소하려면 q) [y/n] : "
+    READ_YN "Auto Excute, If you select n, proceed interactively  (Cancel : q) [y/n] : "
     if [ "$Y_N" == "y" ]
     then
         mkdir -p $BKUP_DIR/$TIME
@@ -401,7 +400,7 @@ then
 
     elif [ "$Y_N" == "n" ]
     then
-        READ_YN "원본백업 및 준비진행합니다. n 선택 시 원본에 직접작업합니다. (취소하려면 q) [y/n] : "
+        READ_YN "Proceed with original file backup and preparation.. If you select n, Work directly on the original file. (Cancel : q) [y/n] : "
         if [ "$Y_N" == "y" ]    
         then
             mkdir -p $BKUP_DIR/$TIME
@@ -427,7 +426,7 @@ then
             COMMENT10_FN
         fi
 
-        READ_YN "CPU이름, 코어수 측정 후 반영합니다. n 선택 시 원복합니다. (취소하려면 q) [y/n] : "
+        READ_YN "CPU name, Core count and reflects it. If you select n, Resote original file (Cancel : q) [y/n] : "
         if [ "$Y_N" == "y" ]    
         then    
             GATHER_FN
@@ -461,40 +460,40 @@ fi
 }
 
 COMMENT03_FN () {
-    echo -e "동일버전 실행 이력이 있습니다. 2) 다시실행 으로 진행바랍니다.\n"
+    echo -e "There is a history of running the same version. Please run again select 2) redo .\n"
     exit 0
 }
 
 COMMENT04_FN () {
-    echo -e "상위버전 설치시 원복작업은 없습니다. 계속진행합니다.\n"
+    echo -e "Do not restore to source when installing a higher version. Contiue...\n"
 }
 
 COMMENT05_FN () {
-    echo -e "이전버전 설치 확인 및 조치완료 했습니다. 계속진행합니다.\n"
+    echo -e "You have verified and installed the previous version. Contiue...\n"
 }
 
 COMMENT06_FN () {
-    echo -e "문제가 발생하여 종료합니다. 확인 후 다시 진행해주세요."
+    echo -e "Problem and exit. Please run again after checking."
     exit 0    
 }
 
 COMMENT07_FN () {
-    echo -e "수행이력이 없습니다. 처음실행으로 다시 진행해주세요."
+    echo -e "No execution history. Please go back to the first run."
     exit 0
 }
 
 COMMENT08_FN () {
-    echo -e "작업대상 파일(경로)이 존재하지 않습니다. 확인 후 다시 진행해주세요."
+    echo -e "The target file(location) does not exist. Please run again after checking."
     exit 0
 }
 
 COMMENT09_FN () {
-    echo -e "작업이완료 되었습니다!! 반영에는 약 1~2분 소요되며, \n(F5로 DSM 페이지 새로고침 후 또는 로그아웃/로그인 후 정보를 확인바랍니다.)"
+    echo -e "The operation is complete!! It takes about 1-2 minutes to reflect, \n(Please refresh the DSM page with F5 or after logout/login and check the information.)"
     exit 0
 }
 
 COMMENT10_FN () {
-    echo -e "y / n / q 만 입력가능합니다. 다시진행해주세요."
+    echo -e "Only y / n / q can be input. Please proceed again."
     exit 0
 }
 
@@ -507,7 +506,7 @@ MWORK_DIR="/usr/syno/synoman/mobile/ui"
 BKUP_DIR="/root/Xpenology_backup"
 VER_DIR="/etc.default"
 
-cecho c "DSM CPU 정보 변경 도구 ver. \033[0;31m"$ver"\033[00m - FOXBI 제작\n"
+cecho c "DSM CPU Information Change Tool ver. \033[0;31m"$ver"\033[00m - made by FOXBI\n"
 
 if [ -d "$VER_DIR" ]
 then
@@ -520,8 +519,15 @@ if [ -f "$VER_FIL" ]
 then
     MA_VER=`cat $VER_FIL | grep majorversion | awk -F \= '{print $2}' | sed 's/\"//g'`
     MI_VER=`cat $VER_FIL | grep minorversion | awk -F \= '{print $2}' | sed 's/\"//g'`
-    BL_NUM=`cat $VER_FIL | grep buildnumber | awk -F \= '{print $2}' | sed 's/\"//g'`
-    BL_FIX=`cat $VER_FIL | grep smallfixnumber | awk -F \= '{print $2}' | sed 's/\"//g'`    
+    PD_VER=`cat $VER_FIL | grep productversion | awk -F \= '{print $2}' | sed 's/\"//g'`
+    BL_NUM=`cat $VER_FIL | grep buildnumber | awk -F \= '{print $2}' | sed 's/\"//g'`    
+    BL_FIX=`cat $VER_FIL | grep smallfixnumber | awk -F \= '{print $2}' | sed 's/\"//g'`
+    if [ "$BL_FIX" -gt "0" ]
+    then
+        BL_UP="Update $BL_FIX"
+    else
+        BL_UP=""
+    fi
 else
     COMMENT08_FN
 fi
@@ -536,13 +542,25 @@ then
     then
         MWORK_DIR="/usr/syno/synoman/webman/mapp"
     fi
-    cecho g "사용중인 DSM버전은 \033[0;36mDSM \033[0;31m"$MA_VER"."$MI_VER"\033[0;32m 입니다. 계속진행합니다..\033[00m\n"
+    cecho g "Your version of DSM is \033[0;36mDSM \033[0;31m"$PD_VER"-"$BL_NUM" $BL_UP \033[0;32m continue...\033[00m\n"
 else
-    echo "DSM 5 버전미만은 지원하지 않습니다. 진행을 종료합니다."
+    echo "DSM version less than 5 is not supported. End the process."
     exit 0
 fi
-    
-read -n1 -p "1) 처음실행  2) 다시실행  3) 원상복구  - 번호 선택하세요 : " run_select 
+
+if [ "$MA_VER" -ge "6" ]
+then
+    if [ "$BL_NUM" -ge "24922" ]
+    then
+        dt=h
+    else
+        dt=f
+    fi
+else
+    dt=b
+fi
+
+read -n1 -p "1) First run  2) Redo  3) Restore - Select Number : " run_select 
    case "$run_select" in
    1) run_check=run 
       echo -e "\n " ;;
@@ -555,22 +573,22 @@ read -n1 -p "1) 처음실행  2) 다시실행  3) 원상복구  - 번호 선택�
 
 if [ "$run_check" == "redo" ]
 then
-	READ_YN "다시실행을 진행하시겠습니까? 원본백업으로 복구 후 진행합니다.(취소하려면 q) [y/n] : "
+	READ_YN "Do you want to proceed again? Restore to original file backup and proceed.(Cancel : q) [y/n] : "
     if [ "$Y_N" == "y" ]    
     then
-        re_check=y
+        re_check=y        
         BLCHECK_FN "$run_check"
         run_check=run
         EXEC_FN
     elif [ "$Y_N" == "n" ]
     then
-        echo "다시실행을 진행하지 않습니다."    
+        echo "Do not proceed with the redo."    
     else
         COMMENT10_FN
     fi
-elif [ "$run_check" = "restore" ]
+elif [ "$run_check" == "restore" ]
 then
-	READ_YN "원본 백업파일을 이용하여 복구를 진행하시겠습니까? (취소하려면 q) [y/n] : "
+	READ_YN "Do you want to restore using the original backup file? (Cancel : q) [y/n] : "
     if [ "$Y_N" == "y" ]    
     then
         re_check=n
@@ -578,15 +596,15 @@ then
         RECOVER_FN
     elif [ "$Y_N" == "n" ]
     then
-        echo "복구를 진행하지 않습니다."   
+        echo "No restore was performed."   
     else
         COMMENT10_FN
     fi
-elif [ "$run_check" = "run" ]
+elif [ "$run_check" == "run" ]
 then
     re_check=n
     BLCHECK_FN "$run_check"
     EXEC_FN
 else
-    echo "올바른 번호선택바랍니다."
+    echo "Please select the correct number."
 fi

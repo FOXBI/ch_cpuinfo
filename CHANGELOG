@@ -1,5 +1,19 @@
 # Change Log
 
+1.1.0-r01.
+   - Update new version (ch_cpuinfo ver 1.1.0-r01) 2019.08.01
+
+   - Consolidate and change to run in accordance with your DSM language environment
+
+   - Add link for cpu detail information(Intel, AMD Site Link) - Support above version 6.x 
+
+1.0.0-b01.
+   - Update new version (ch_cpuinfo ver 1.0.0-b01) 2019.07.29
+
+     Version view method change.
+
+     Support above version "DSM 6.2.2-24922 Update 2"
+
 5.2.
    - Update new version (ch_cpuinfo ver 5.2) 2018.12.07
      

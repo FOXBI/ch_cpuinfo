@@ -7,6 +7,9 @@
 
    - admin_center.js file sedding method change
 
+   - Fix errors that occur during 2) Redo
+     ex. grep: Unmatched ( or \(
+
 2.2.1-r01.
    - Update new version (ch_cpuinfo ver 2.2.1-r01) 2020.04.29
 

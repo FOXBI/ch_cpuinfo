@@ -1,5 +1,28 @@
 # Change Log
 
+2.3.2-r01.
+   - Update new version (ch_cpuinfo ver 2.3.2-r01) 2021.06.18
+
+   - LANG.txt find location fixed
+
+   - admin_center.js file sedding method change
+
+2.2.1-r01.
+   - Update new version (ch_cpuinfo ver 2.2.1-r01) 2020.04.29
+
+   - undefined error fixed
+
+2.1.1-r01.
+   - Update new version (ch_cpuinfo ver 2.2.1-r01) 2020.04.27
+
+   - Support DSM 6.2.3-25423 
+
+   - Change of CPU information collection method, Collect using only /proc/cpuinfo.
+     Do not use dmidecode(for systems without dmidecode commands ...)
+
+   - Support MultiLanguage(User can modify LANG.txt and apply it)
+     Maintaining Korean / English support by default
+
 1.1.0-r01.
    - Update new version (ch_cpuinfo ver 1.1.0-r01) 2019.08.01
 

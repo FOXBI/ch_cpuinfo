@@ -104,10 +104,16 @@ PREPARE_FN () {
 }
 
 GATHER_FN () {
-    cpu_vendor=`cat /proc/cpuinfo | grep model | grep name | sort -u | sed "s/(.)//g" | sed "s/(..)//g" | sed "s/CPU//g" | awk '{print $4}'`
+    cpu_vendor_chk=`cat /proc/cpuinfo | grep model | grep name | sort -u | sed "s/(.)//g" | sed "s/(..)//g" | sed "s/CPU//g" | grep AMD | wc -l`
+    if [ "$cpu_vendor_chk" -gt "0" ]
+    then
+        cpu_vendor="AMD"
+    else
+        cpu_vendor="Intel"
+    fi
     if [ "$cpu_vendor" == "AMD" ]
     then
-        cpu_family=`cat /proc/cpuinfo | grep model | grep name | sort -u | sed "s/(.)//g" | sed "s/(..)//g" | sed "s/CPU//g" | awk -F "$cpu_vendor " '{ print $2 }' | awk -F "Processor" '{ print $1 }'`
+        cpu_family=`cat /proc/cpuinfo | grep model | grep name | sort -u | awk -F: '{print $2}' | sed "s/^\s*AMD/AMD/g" | sed "s/^\s//g"`
         cpu_series=""
     else
         cpu_family=`cat /proc/cpuinfo | grep model | grep name | sort -u | sed "s/(.)//g" | sed "s/(..)//g" | sed "s/CPU//g" | awk '{print $5}'`        
@@ -246,7 +252,7 @@ RERUN_FN () {
         GATHER_FN
         if [ -f "$WORK_DIR/admin_center.js" ] && [ -f "$MWORK_DIR/mobile.js" ]
         then
-            info_cnt=`cat $WORK_DIR/admin_center.js | egrep ".model]);if(Ext.isDefined\|.model])}if(Ext.isDefined" | wc -l`
+            info_cnt=`cat $WORK_DIR/admin_center.js | egrep ".model\]\);if\(Ext.isDefined|.model\]\)\}if\(Ext.isDefined" | wc -l`
             info_cnt_m=`cat $MWORK_DIR/mobile.js | grep "ds_model\")},{name:\"ram_size" | wc -l`
             if [ "$info_cnt" -eq "0" ] && [ "$info_cnt_m" -eq "0" ]
             then

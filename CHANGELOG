@@ -10,6 +10,9 @@
    - Fix errors that occur during 2) Redo
      ex. grep: Unmatched ( or \(
 
+   - CPU informatio gathering method change for AMD CPU
+     ex. sed: -e expression #1, char 40: unterminated `s' command
+
 2.2.1-r01.
    - Update new version (ch_cpuinfo ver 2.2.1-r01) 2020.04.29
 

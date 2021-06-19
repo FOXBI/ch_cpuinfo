@@ -1,5 +1,11 @@
 # Change Log
 
+2.4.1-r01.
+   - Update new version (ch_cpuinfo ver 2.4.1-r01) 2021.06.19
+
+   - CPU information gathering method change for AMD CPU
+     ex. sed: -e expression #1, char 40: unterminated `s' command
+
 2.3.2-r01.
    - Update new version (ch_cpuinfo ver 2.3.2-r01) 2021.06.18
 

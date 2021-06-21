@@ -1,5 +1,12 @@
 # Change Log
 
+2.5.2-r01.
+   - Update new version (ch_cpuinfo ver 2.5.2-r01) 2021.06.21
+
+   - CPU information gathering method change for AMD/Intel(ES/Unkown) CPU
+     ex.  Genuine Intel(R) CPU  @ 2.30GHz -> Genuine Intel Unkown
+          Genuine Intel(R) CPU 0000 @ 2.00GHz -> Genuine Intel ES
+
 2.4.1-r01.
    - Update new version (ch_cpuinfo ver 2.4.1-r01) 2021.06.19
 

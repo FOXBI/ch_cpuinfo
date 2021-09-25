@@ -1,5 +1,12 @@
 # Change Log 
 
+3.1.1-r01.
+   - Update new version (ch_cpuinfo ver 3.1.1-r01) 2021.09.26
+
+   - Support DSM 7.x above
+
+   - admin_center.js file sedding method add
+
 2.5.2-r01.
    - Update new version (ch_cpuinfo ver 2.5.2-r01) 2021.06.21
 

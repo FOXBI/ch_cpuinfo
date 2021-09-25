@@ -37,7 +37,7 @@
 
 # Reference URL
 
-https://xpenology.com/forum/topic/13030-dsm-5x6x-cpu-name-cores-infomation-change-tool
+https://xpenology.com/forum/topic/13030-dsm-5x6x7x-cpu-name-cores-infomation-change-tool
 
 
 # Reference Screeshot

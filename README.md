@@ -55,3 +55,5 @@ https://xpenology.com/forum/topic/13030-dsm-5x6x-cpu-name-cores-infomation-chang
 ![Alt text](./github/images/cpu_3617.png "DSM Control Pannel")
 
 ![Alt text](./github/images/mobile_002.png "DSM 6.x Mobile")
+
+![Alt text](./github/images/dsm_7_en.png "DSM Control Pannel")

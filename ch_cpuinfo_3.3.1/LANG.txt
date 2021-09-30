@@ -1,0 +1,38 @@
+## Do not Change variable!!!
+##
+## If you change to Y value of CUSTLANG,
+## You can do change messages contents to your language.
+##
+## Change the value of MSGECHO to use
+##
+CUSTLANG=N
+##
+##
+### Messages Contents
+MSGECHO01="warning!! Work directly on the original file without backup."
+MSGECHO02="Restore to Original Source and Continue."
+MSGECHO03="Delete Previos Version Backup Location."
+MSGECHO04="Auto Excute, If you select n, proceed interactively  (Cancel : q) [y/n] :"
+MSGECHO05="Proceed with original file backup and preparation.. If you select n, Work directly on the original file. (Cancel : q) [y/n] :"
+MSGECHO06="CPU name, Core count and reflects it. If you select n, Resote original file (Cancel : q) [y/n] :"
+MSGECHO07="There is a history of running the same version. Please run again select 2) redo ."
+MSGECHO08="Do not restore to source when installing a higher version. Contiue..."
+MSGECHO09="You have verified and installed the previous version. Contiue..."
+MSGECHO10="Problem and exit. Please run again after checking."
+MSGECHO11="No execution history at this version. Please go back to the first run."
+MSGECHO12="The target file(location) does not exist. Please run again after checking."
+MSGECHO13="The operation is complete!! It takes about 1-2 minutes to reflect, \n(Please refresh the DSM page with F5 or after logout/login and check the information.)"
+MSGECHO14="Only y / n / q can be input. Please proceed again."
+MSGECHO15="DSM CPU Information Change Tool ver."
+MSGECHO16="made by"
+MSGECHO17="Your version of DSM is"
+MSGECHO18="continue"
+MSGECHO19="DSM version less than 5 is not supported. End the process."
+MSGECHO20="1) First run  2) Redo  3) Restore - Select Number :"
+MSGECHO21="Do you want to proceed again? Restore to original file backup and proceed.(Cancel : q) [y/n] :"
+MSGECHO22="Do not proceed with the redo."
+MSGECHO23="Do you want to restore using the original backup file? (Cancel : q) [y/n] :"
+MSGECHO24="No restore was performed."
+MSGECHO25="Please select the correct number."
+## Add inforation 2021.09.30
+MSGECHO26="The CPU information to be applied is as follows."

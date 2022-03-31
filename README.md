@@ -1,5 +1,6 @@
 # Howto Run
 
+made a video of the how to run ch_cpuinfo.<br>
 [![tr_st](http://img.youtube.com/vi/e9I-5srNfNY/0.jpg)](https://youtu.be/e9I-5srNfNY) 
 
 1. Download attached file on your PC (ch_cpuinfo.tar)

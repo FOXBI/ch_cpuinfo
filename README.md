@@ -1,5 +1,7 @@
 # Howto Run
 
+[![tr_st](http://img.youtube.com/vi/e9I-5srNfNY/0.jpg)](https://youtu.be/e9I-5srNfNY) 
+
 1. Download attached file on your PC (ch_cpuinfo.tar)
 
 2. Upload file to your DSM location (by filestation, sftp, webdav etc....)

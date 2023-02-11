@@ -3,6 +3,24 @@
 made a video of the how to run ch_cpuinfo.<br>
 [![tr_st](http://img.youtube.com/vi/e9I-5srNfNY/0.jpg)](https://youtu.be/e9I-5srNfNY) 
 
+** Online **
+
+1. Connect to ssh by admin account. (dsm > control panel > terminal & snmp > terminal > enable ssh check)
+
+2. Switch user to root:
+
+   > sudo su -
+   
+   (input admin password)
+
+3. Download ch_cpuinfo.tar with wget
+
+   > wget https://github.com/FOXBI/ch_cpuinfo/blob/master/ch_cpuinfo.tar
+
+4. Continue Offline step 6.
+
+** Offline **
+
 1. Download attached file on your PC (ch_cpuinfo.tar)
 
 2. Upload file to your DSM location (by filestation, sftp, webdav etc....)

@@ -1,5 +1,14 @@
 # Change Log 
 
+4.0.0-r01.
+   - Update new version (ch_cpuinfo ver 4.0.0-r01) 2023.02.11 
+
+   - Added intel/AMD cpu information collection function (generation output)
+    
+   - Changed the method of collecting cpu information
+     
+   - xpenlib(cpu_info.sh) refered https://github.com/FOXBI/xpenlib/blob/main/cpu_info.sh 
+   
 3.3.1-r01.
    - Update new version (ch_cpuinfo ver 3.3.1-r01) 2021.09.30
 

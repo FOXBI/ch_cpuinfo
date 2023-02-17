@@ -1,5 +1,18 @@
 # Change Log 
 
+4.1.1-r01.
+   - Update new version (ch_cpuinfo ver 4.1.0-r01) 2023.02.19 
+
+   - Support for changing CPU information in Surveillance Station System information 
+     (User requests on github [Not work in Surveillance Station #34])
+     Tested DSM 7.x version & Surveillance Station 6.0.3-4473
+
+   - Modified work result comments (output when using Surveillance Station)
+
+   - Updated LANG.txt
+
+   - Add Updated date & Comment
+
 4.0.0-r01.
    - Update new version (ch_cpuinfo ver 4.0.0-r01) 2023.02.11 
 

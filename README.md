@@ -3,6 +3,8 @@
 made a video of the how to run ch_cpuinfo.<br>
 [![tr_st](http://img.youtube.com/vi/e9I-5srNfNY/0.jpg)](https://youtu.be/e9I-5srNfNY) 
 
+![image](https://user-images.githubusercontent.com/42568682/218249473-f8fe1241-49dd-482c-a0fa-4d673fcfd754.png)
+
 ** Online **
 
 1. Connect to ssh by admin account. (dsm > control panel > terminal & snmp > terminal > enable ssh check)
@@ -15,7 +17,7 @@ made a video of the how to run ch_cpuinfo.<br>
 
 3. Download ch_cpuinfo.tar with wget
 
-   > wget https://github.com/FOXBI/ch_cpuinfo/blob/master/ch_cpuinfo.tar
+   > wget https://github.com/FOXBI/ch_cpuinfo/releases/download/ch_cpuinfo/ch_cpuinfo.tar
 
 4. Continue Offline step 6.
 
@@ -69,14 +71,8 @@ https://xpenology.com/forum/topic/13030-dsm-5x6x7x-cpu-name-cores-infomation-cha
 
 ![Alt text](./github/images/ch_cpuinfo_003.png "Run Image")
 
-![Alt text](./github/images/cpu_918.png "DSM Control Pannel")
-
-![Alt text](./github/images/cpu_3615.png "DSM Control Pannel")
-
-![Alt text](./github/images/cpu_3617.png "DSM Control Pannel")
-
 ![Alt text](./github/images/mobile_002.png "DSM 6.x Mobile")
 
-![Alt text](./github/images/dsm_7_3615_en.png "DSM Control Pannel")
+![Alt text](./github/images/dsm_7_3622_en.png "DSM Control Pannel")
 
-![Alt text](./github/images/dsm_7_918_en.png "DSM Control Pannel")
+![Alt text](./github/images/surveillance_001.png "Suveillance Station Control Pannel")

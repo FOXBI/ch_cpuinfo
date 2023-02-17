@@ -1,7 +1,5 @@
 #!/bin/sh
-# Updated 2023.02.17 - By FOXBI
-# htttps://github.com/foxbi/ch_cpuinfo
-ver="4.1.1-r01"
+ver="4.0.0-r01"
 # ==============================================================================
 # Location Check
 # ==============================================================================
@@ -88,25 +86,17 @@ PREPARE_FN () {
             tar -cf $BKUP_DIR/$TIME/admin_center.tar admin_center.js*
             cd $MWORK_DIR
             tar -cf $BKUP_DIR/$TIME/mobile.tar mobile.js*
-            if [ -f "$SWORK_DIR/System.js" ]
-            then
-                cd $SWORK_DIR
-                tar -cf $BKUP_DIR/$TIME/System.tar System.js*
-                cp -Rf $SWORK_DIR/System.js $BKUP_DIR/
-            fi
         fi
         if [ "$MA_VER" -eq "6" ] && [ "$MI_VER" -ge "2" ]
         then
             mv $WORK_DIR/admin_center.js.gz $BKUP_DIR/
             mv $MWORK_DIR/mobile.js.gz $BKUP_DIR/
-            cp -Rf $SWORK_DIR/System.js $BKUP_DIR/
 	        cd $BKUP_DIR/
             gzip -df $BKUP_DIR/admin_center.js.gz 
-            gzip -df $BKUP_DIR/mobile.js.gz
+            gzip -df $BKUP_DIR/mobile.js.gz        
         else
             cp -Rf $WORK_DIR/admin_center.js $BKUP_DIR/
             cp -Rf $MWORK_DIR/mobile.js $BKUP_DIR/
-            cp -Rf $SWORK_DIR/System.js $BKUP_DIR/
         fi
     else
         COMMENT08_FN
@@ -258,22 +248,13 @@ PERFORM_FN () {
             then
                 cpu_info=`echo "${dt}.cpu_vendor=\"${cpu_vendor}\",${dt}.cpu_family=\"${cpu_family}\",${dt}.cpu_series=\"${cpu_series}\",${dt}.cpu_cores=\"${cpu_cores}\",${dt}.cpu_detail=\"${cpu_detail}\","`
                 sed -i "s/Ext.isDefined(${dt}.cpu_vendor/${cpu_info}Ext.isDefined(${dt}.cpu_vendor/g" $BKUP_DIR/admin_center.js
-                if [ -f "$BKUP_DIR/System.js" ]
-                then
-                    cpu_info_s=`echo ${cpu_info} | sed "s/${dt}.cpu/${st}.cpu/g"`
-                    sed -i "s/Ext.isDefined(${st}.cpu_vendor/${cpu_info_s}Ext.isDefined(${st}.cpu_vendor/g" $BKUP_DIR/System.js
-                fi
             else
                 cpu_info=`echo "${dt}.cpu_vendor=\"${cpu_vendor}\";${dt}.cpu_family=\"${cpu_family}\";${dt}.cpu_series=\"${cpu_series}\";${dt}.cpu_cores=\"${cpu_cores}\";${dt}.cpu_detail=\"${cpu_detail}\";"`
                 sed -i "s/if(Ext.isDefined(${dt}.cpu_vendor/${cpu_info}if(Ext.isDefined(${dt}.cpu_vendor/g" $BKUP_DIR/admin_center.js
             fi
             sed -i "s/${dt}.cpu_series)])/${dt}.cpu_series,${dt}.cpu_detail)])/g" $BKUP_DIR/admin_center.js
             sed -i "s/{2}\",${dt}.cpu_vendor/{2} {3}\",${dt}.cpu_vendor/g" $BKUP_DIR/admin_center.js
-            if [ -f "$BKUP_DIR/System.js" ]
-            then
-                sed -i "s/${st}.cpu_series)])/${st}.cpu_series,${st}.cpu_detail)])/g" $BKUP_DIR/System.js
-                sed -i "s/{2}\",${st}.cpu_vendor/{2} {3}\",${st}.cpu_vendor/g" $BKUP_DIR/System.js                  
-            fi
+
             cpu_info_m=`echo "{name: \"cpu_series\",renderer: function(value){var cpu_vendor=\"${cpu_vendor}\";var cpu_family=\"${cpu_family}\";var cpu_series=\"${cpu_series}\";var cpu_cores=\"${cpu_cores}\";return Ext.String.format('{0} {1} {2} [ {3} ]', cpu_vendor, cpu_family, cpu_series, cpu_cores);},label: _T(\"status\", \"cpu_model_name\")},"`
             sed -i "s/\"ds_model\")},/\"ds_model\")},${cpu_info_m}/g" $BKUP_DIR/mobile.js
         else
@@ -295,14 +276,10 @@ APPLY_FN () {
     then    
         cp -Rf $BKUP_DIR/admin_center.js $WORK_DIR/
         cp -Rf $BKUP_DIR/mobile.js $MWORK_DIR/
-        if [ -f "$BKUP_DIR/System.js" ]
-        then
-            cp -Rf $BKUP_DIR/System.js $SWORK_DIR/
-        fi     
         if [ "$MA_VER" -eq "6" ] && [ "$MI_VER" -lt "2" ]
         then
             rm -rf $BKUP_DIR/admin_center.js
-            rm -rf $BKUP_DIR/mobile.js   
+            rm -rf $BKUP_DIR/mobile.js        
         else
             gzip -f $BKUP_DIR/admin_center.js
             gzip -f $BKUP_DIR/mobile.js
@@ -323,11 +300,6 @@ RECOVER_FN () {
         then
             cd $MWORK_DIR
             tar -xf $BKUP_DIR/$TIME/mobile.tar
-        fi
-        if [ -f "$BKUP_DIR/$TIME/System.tar" ]
-        then
-            cd $SWORK_DIR
-            tar -xf $BKUP_DIR/$TIME/System.tar
         fi
         if [ "$re_check" == "y" ]
         then
@@ -357,13 +329,9 @@ RERUN_FN () {
         then
             if [ "$MA_VER" -ge "7" ]
             then
-                info_cnt=`cat $WORK_DIR/admin_center.js | egrep "${dt}.model\]\),Ext.isDefined\(${dt}.cpu_vendor" | wc -l`
-                if [ -f "$BKUP_DIR/System.js" ]
-                then
-                    info_cnt_s=`cat $WORK_DIR/admin_center.js | egrep "${st}.model\]\),Ext.isDefined\(${st}.cpu_vendor" | wc -l`
-                fi                
+                info_cnt=`cat $WORK_DIR/admin_center.js | egrep "t.model\]\),Ext.isDefined\(t.cpu_vendor" | wc -l`
             else
-                info_cnt=`cat $WORK_DIR/admin_center.js | egrep ".model\]\);if\(Ext.isDefined|.model\]\)\}if\(Ext.isDefined" | wc -l`              
+                info_cnt=`cat $WORK_DIR/admin_center.js | egrep ".model\]\);if\(Ext.isDefined|.model\]\)\}if\(Ext.isDefined" | wc -l`
             fi
             info_cnt_m=`cat $MWORK_DIR/mobile.js | grep "ds_model\")},{name:\"ram_size" | wc -l`
             if [ "$info_cnt" -eq "0" ] && [ "$info_cnt_m" -eq "0" ]
@@ -378,7 +346,6 @@ RERUN_FN () {
                     if [ "$MA_VER" -ge "7" ]
                     then
                         cpu_info="${dt}.cpu_vendor=\\\"${cpu_vendor}\\\",${dt}.cpu_family=\\\"${cpu_family}\\\",${dt}.cpu_series=\\\"${cpu_series}\\\",${dt}.cpu_cores=\\\"${cpu_cores}\\\",${dt}.cpu_detail=\\\"${cpu_detail}\\\","
-                        cpu_info_s="${st}.cpu_vendor=\\\"${cpu_vendor}\\\",${st}.cpu_family=\\\"${cpu_family}\\\",${st}.cpu_series=\\\"${cpu_series}\\\",${st}.cpu_cores=\\\"${cpu_cores}\\\",${st}.cpu_detail=\\\"${cpu_detail}\\\","
                     else
                         cpu_info="${dt}.cpu_vendor=\\\"${cpu_vendor}\\\";${dt}.cpu_family=\\\"${cpu_family}\\\";${dt}.cpu_series=\\\"${cpu_series}\\\";${dt}.cpu_cores=\\\"${cpu_cores}\\\";${dt}.cpu_detail=\\\"${cpu_detail}\\\";"
                     fi
@@ -721,24 +688,12 @@ COMMENT08_FN () {
 COMMENT09_FN () {
     if [ "$LC_CHK" == "CUSTOMLANG" ]
     then
-        if [ -f "$SWORK_DIR/System.js" ]
-        then
-            echo -e "$MSGECHO13"
-        fi
-        echo -e "$MSGECHO13"        
+        echo -e "$MSGECHO13"
     elif [ "$LC_CHK" == "Seoul" ]
     then
-        if [ -f "$SWORK_DIR/System.js" ]
-        then
-            echo -e "Surveillance Studio를 사용하는 경우 Surveillance Studio 시스템 정보에도 반영됩니다."
-        fi
-        echo -e "작업이완료 되었습니다!! 반영에는 약 1~2분 소요되며, \n(F5로 DSM 페이지 새로고침 후 또는 로그아웃/로그인 후 정보를 확인바랍니다."        
+        echo -e "작업이완료 되었습니다!! 반영에는 약 1~2분 소요되며, \n(F5로 DSM 페이지 새로고침 후 또는 로그아웃/로그인 후 정보를 확인바랍니다.)"
     else
-        if [ -f "$SWORK_DIR/System.js" ]
-        then
-            echo -e "If you use Surveillance Studio, it also applies to Surveillance Studio System Information."
-        fi
-        echo -e "The operation is complete!! It takes about 1-2 minutes to apply, \n(Please refresh the DSM page with F5 or after logout/login and check the information.)"        
+        echo -e "The operation is complete!! It takes about 1-2 minutes to reflect, \n(Please refresh the DSM page with F5 or after logout/login and check the information.)"
     fi
     exit 0
 }
@@ -761,7 +716,6 @@ COMMENT10_FN () {
 # ==============================================================================
 clear
 WORK_DIR="/usr/syno/synoman/webman/modules/AdminCenter"
-SWORK_DIR="/var/packages/SurveillanceStation/target/ui/modules/System"
 MWORK_DIR="/usr/syno/synoman/mobile/ui"
 BKUP_DIR="/root/Xpenology_backup"
 VER_DIR="/etc.default"
@@ -837,7 +791,6 @@ then
     if [ "$MA_VER" -ge "7" ]
     then
         dt=t
-        st=e        
     else
         if [ "$BL_NUM" -ge "24922" ]
         then
@@ -857,7 +810,7 @@ fi
 
 GATHER_FN
 
-cpu_cores=`echo ${cpu_cores}"-"${cpu_gen} | sed 's/\\\//g'`
+cpu_cores=`echo ${cpu_cores} | sed 's/\\\//g'`
 
 if [ "$LC_CHK" == "CUSTOMLANG" ]
 then

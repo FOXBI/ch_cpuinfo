@@ -1,7 +1,14 @@
 # Change Log 
 
+4.2.0-r01.
+   - Update new version (ch_cpuinfo ver 4.2.0-r01) 2023.02.18 
+
+   - Application of AMD's CPU information collection function improvement
+
+   - xpenlib(cpu_info.sh) refered https://github.com/FOXBI/xpenlib/blob/main/cpu_info.sh 
+
 4.1.1-r01.
-   - Update new version (ch_cpuinfo ver 4.1.0-r01) 2023.02.19 
+   - Update new version (ch_cpuinfo ver 4.1.1-r01) 2023.02.17 
 
    - Support for changing CPU information in Surveillance Station System information 
      (User requests on github [Not work in Surveillance Station #34])

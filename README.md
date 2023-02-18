@@ -65,11 +65,11 @@ https://xpenology.com/forum/topic/13030-dsm-5x6x7x-cpu-name-cores-infomation-cha
 
 # Reference Screeshot
 
-![Alt text](./github/images/ch_cpuinfo_001.png "Run Image")
+![Alt text](./github/images/ch_cpuinfo_001.png "new Run Image")
 
-![Alt text](./github/images/ch_cpuinfo_002.png "Run Image")
+![Alt text](./github/images/ch_cpuinfo_002.png "new Redo Image")
 
-![Alt text](./github/images/ch_cpuinfo_003.png "Run Image")
+![Alt text](./github/images/ch_cpuinfo_003.png "new Recover Image")
 
 ![Alt text](./github/images/mobile_002.png "DSM 6.x Mobile")
 

@@ -1,7 +1,7 @@
 #!/bin/sh
-# Updated 2023.03.05 - By FOXBI
+# Updated 2023.02.18 - By FOXBI
 # htttps://github.com/foxbi/ch_cpuinfo
-ver="4.2.1-r01"
+ver="4.2.0-r01"
 # ==============================================================================
 # Location Check
 # ==============================================================================
@@ -99,20 +99,14 @@ PREPARE_FN () {
         then
             mv $WORK_DIR/admin_center.js.gz $BKUP_DIR/
             mv $MWORK_DIR/mobile.js.gz $BKUP_DIR/
-            if [ -f "$SWORK_DIR/System.js" ]
-            then              
-                cp -Rf $SWORK_DIR/System.js $BKUP_DIR/
-            fi
+            cp -Rf $SWORK_DIR/System.js $BKUP_DIR/
 	        cd $BKUP_DIR/
             gzip -df $BKUP_DIR/admin_center.js.gz 
             gzip -df $BKUP_DIR/mobile.js.gz
         else
             cp -Rf $WORK_DIR/admin_center.js $BKUP_DIR/
             cp -Rf $MWORK_DIR/mobile.js $BKUP_DIR/
-            if [ -f "$SWORK_DIR/System.js" ]
-            then            
-                cp -Rf $SWORK_DIR/System.js $BKUP_DIR/
-            fi
+            cp -Rf $SWORK_DIR/System.js $BKUP_DIR/
         fi
     else
         COMMENT08_FN

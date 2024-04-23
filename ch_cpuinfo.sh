@@ -133,7 +133,7 @@ GATHER_FN () {
             cpu_vendor=`cat /proc/cpuinfo | grep Hardware | sort -u | awk '{print $3}' | head -1`
             if [ -z "$cpu_vendor" ]
             then
-                cpu_vendor=`cat /proc/cpuinfo grep model | grep name | sort -u | awk '{print $3}' | head -1`
+                cpu_vendor=`cat /proc/cpuinfo | grep model | grep name | sort -u | awk '{print $3}' | head -1`
             fi
         fi
     fi
